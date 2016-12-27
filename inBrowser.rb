@@ -8,6 +8,10 @@ Plugin.create(:inBrowser) do
     boolean "PC版サイトを表示する", :browser_PCver
   end
 
+  intent :web, label: '内部ブラウザで開く' do |intent_token|
+    create_tab(intent_token.model.uri)
+  end
+
   command(:in_browser_open_homepage_in_new_tab,
           icon: Enumerator.new{|y| Plugin.filtering(:photo_filter, File.join(__dir__, 'icon.png'), y)}.first,
           name: 'ホームページを開く',
